@@ -3,6 +3,7 @@
 ### Description:
 
 Repository for MFF-NSWI041 subject on MFF.
+Below is brief description of the work that we will have to do. For each work item, there will be [issue](https://github.com/schafric/MFF-NSWI041/issues) created with ✅ checkboxes which will indicate specific todos for each member of our team.
 
 ### Todos:
 
