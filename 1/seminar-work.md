@@ -126,27 +126,36 @@ has been authorized via central authorization module before accessing it.
 - Save created `central schedule`, remove it to start all over, release it
   to other modules and university personnel.
 
-**Student activities**
+**Student and teacher activities**
 
 - View available information about `subjects`, `rooms` and `schedule sheets`.
 
+- View `central schedule` released by a planner entirely, or filtered by
+  various criterions.
+
+**Specific student activities**
+
 - View `studying plan` with additional information about already passed
   mandatory subjects.
-
-- View `central schedule` released by a planner.
 
 - Maintain a bin of `schedule triples` for the current semester with ability
   to add, and remove them without any restrictions. A bin is used for
   constructing preliminary student schedule, actual construction happens
   within `Enrollment` module.
 
-**Teacher activities**
+**Specific teacher activities**
 
-- TBA
+- Introduce unavailability constraints into a prepared `central schedule`.
+  Such constraints will be considered while creating `schedule triples`, but
+  are not mandatory for a `planner`.
 
 **Reporting activities**
 
-- TBA
+- Collect and view statistics about room occupation or fulfillment of all
+  `studying plans` for the current semester.
+
+- Import the entire `central schedule` or certains parts of it in a data
+  format of choice (json, csv, pdf, etc.).
 
 #### Actors
 
@@ -167,20 +176,13 @@ an authority, who defines `subjects`, `rooms`, `studying plans`,
 
 ##### Actor: Student
 
-`Student` is an actor performing **student activities**. This is 
-
-- View all available subjects, filter and group them by a criterion selected
-  from available information.
-
-- Enroll and cancel enrollment in a particular `Schedule sheet`.
+`Student` is an actor performing **student activities**. The user can view
+existing entities, but cannot modify them or intervene planning process.
 
 ##### Actor: Teacher
 
-`Teacher` is an actor with the abilities listed below.
-
-- Add time spans of unavailability
-
-- View central schedule, filter by different selectors.
+`Teacher` is an actor performing **teacher activities**. The user can introduce
+non-mandatory constraints into planning process and can view planning entities.
 
 #### Use cases
 
