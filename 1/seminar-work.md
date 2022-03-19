@@ -12,30 +12,46 @@ only tasks specific for scheduling.
 `Subject` is a system entity, which identifies educational subject (such
 as Combinatorics, Mathematical analysis, etc.).
 
-`Room` is an entity, which describes and identifies physical room.
+`Room` is an entity, which describes and identifies physical room in the
+university building.
 
 `Schedule sheet` is a virtual placeholder with unique identifier, which
-interconnects a subject and student capacity. These entities are created based
-on estimated interest of the students.
+identifies a pair of subject and student capacity, ex. 0x654494 <->
+(Mathematical Analysis 1, 24). These entities are created based on estimated
+students' interest.
 
-`Schedule` is a finite set of triples (timetable, room, time span). A schedule
-is considered as invalid if there is a triple with overlapping time spans.
-Otherwise, the schedule is considered as valid.
+`Schedule triple` is any (schedule sheet, room, time span) triple, where time
+span contains two time stamps symbolizing start and finish of an event.
 
-`Standard operations` on a system entity are creating, modifying, removing and viewing.
+`Schedule` is a finite set of schedule triples. A schedule is considered as
+invalid if there is a pair of triples with overlapping time spans. Otherwise,
+the schedule is considered as valid.
+
+`Central schedule` is a valid schedule is being created for the upcoming
+semester by a `planner`.
+
+`Student schedule` is a valid or invalid schedule for the upcoming semester
+formed by a `student`.
+
+`Standard operations` on a system entity are creating, modifying, removing
+and viewing.
 
 ## Functional Requirements
 
 This section specifies the functional requirements.
 
 Requirements are divided on two parts, user and system. User requirements
-cover users' imminent needs and wishes. Subsequent system requirements
-discuss previously introduced in greater detail and also cover constraints
-arisen from the problem domain.
+cover users' imminent needs and wishes. Subsequent system requirements discuss
+previously introduced in greater detail and also cover constraints arisen from
+the problem domain.
+
+Certain requirements repeatedly appear in different contexts. For instance,
+the ability to create and modify subject is a user requirement as well as
+ability of an actor `planner`.
 
 ### User requirements
 
-TODO...
+
 
 An entity of any schedule is an interconnection of two
 notions scheduling sheet and room by time span.
@@ -54,13 +70,15 @@ that some kind of user entities already exist. As an example, students are
 created in module `Students` and their profiles must be integrated within
 module `Scheduling`.
 
-A student could enroll in additional subjects of choice if no conflicts arise.
+A student could enroll in additional subjects of choice even thhough conflicts
+arise.
 ---
 
 We further list user requirements with intention to identify detailed system
 requirements and actors. Each item of the list may be read as "The system should
 provide ability to..."
 
+- 
 - Perform standard operations on subjects, rooms and timetables.
 - 
 - View constructed schedule by  semester, month and week.
@@ -70,54 +88,77 @@ provide ability to..."
 
 ### System requirements
 
-We use approach similar to the previous chapter.
+We use approach similar to the previous chapter, group and list requirements
+based on semantics and meaning. We assume, that the module user is a `root`
+profile or has been authorized via central authorization module before
+accessing it.
 
-- Import vital information about existing profiles from central record module.
-- Enrich imported profiles by `Scheduling` metadata (role, etc.)
+**User interface**
 
-- 
-- The system provides modern web interface with all functionality necessary for
-the operation.
+- Provide modern web interface with all functionality necessary for the
+  operation.
 
-- A valid schedule spans standard semester, either winter or summer.
+**Administration**
 
+- Restart and shut down the `Scheduling` module.
 
-- 
+- Perform standard operations on user profiles.
 
-- 
+- Modify profile system role. Administrator role can assign roles to other
+  profiles. The module is initialized with one `root` administrator profile.
 
-- Verify if timetable 
+- Interconnect `Scheduling` profiles with profiles from central record module.
 
-- 
+**User activities**
+
+TBA
+
+**Planning**
+
+TBA
 
 #### Actors
 
 We define several kinds of actors: administrator, guest, student, teacher and
 planner.
 
-[*Document here all actors from the use case diagrams. Make a subsection for each actor and their short description in each subsection.*]
-
 ##### Actor: Administrator
 
-
+TBA
 
 ##### Actor: Guest
 
-Guest is an actor with limited abilities, such as viewing subjects
+Guest is an actor with limited abilities listed below.
 
-##### Actor: Student
-
-The student should be able to do the following activities.
-
-- View all available subjects, filter and group them by a criterion selected from available metadata.
-- 
+- Viewing subjects.
 
 ##### Actor: Planner
 
-Planner is an actor with the following abilities.
+`Planner` is an actor with the abilities listed below.
 
-- Perform standard operations on a subject. By modifying a subject we mean to update metadata, such as description, advancement, , etc.
-- Create 
+- Perform standard operations on a subject. By modifying a subject we mean
+  updating description, sylabus, amount of e-credits, guarantor, etc.
+
+- Perform standard operations on a 
+
+- Create and modify central schedule for the current semester.
+
+##### Actor: Student
+
+`Student` is an actor with the abilities listed below.
+
+- View all available subjects, filter and group them by a criterion selected
+  from available information.
+
+- Enroll and cancel enrollment in a particular `Schedule sheet`.
+
+##### Actor: Teacher
+
+`Teacher` is an actor with the abilities listed below.
+
+- Add time spans of unavailability
+
+- View central schedule, filter by different selectors.
 
 #### Use cases
 
