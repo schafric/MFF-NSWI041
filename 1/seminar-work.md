@@ -10,31 +10,28 @@ perform only tasks specific for scheduling.
 ## Definitions
 
 `Subject` is a system entity, which identifies educational subject (such
-as Combinatorics, Mathematical analysis, etc.).
+as Combinatorics, Mathematical Analysis, etc.).
 
 `Room` is an entity, which describes and identifies physical room in the
-university building.
+university building or virtual room in any available videotelephony software
+program.
+
+`Studying plan` is a list of mandatory subjects, that a student shall
+accomplish before submitting thesis.
 
 `Schedule sheet` is a virtual placeholder with unique identifier, which
-identifies a pair of subject and student capacity, ex. 0x654494 <->
-(Mathematical Analysis 1, 24). These entities are created based on estimated
+identifies a pair of subject and student capacity, ex. id <->
+(subject, capacity). These entities are created based on estimated
 students' interest.
 
 `Schedule triple` is any (schedule sheet, room, time span) triple, where time
 span contains two time stamps symbolizing start and finish of an event.
 
 `Schedule` is a finite set of schedule triples. A schedule is considered as
-invalid if there is a pair of triples with overlapping time spans. Otherwise,
-the schedule is considered as valid.
+invalid if there is a pair of triples with overlapping time spans.
 
-`Central schedule` is a valid schedule is being created for the upcoming
-semester by a `planner`.
-
-`Student schedule` is a valid or invalid schedule for the upcoming semester
-formed by a `student`.
-
-`Studying plan` is an identifiable list of mandatory subjects, that a student
-shall accomplish before submitting thesis.
+`Central schedule` is a valid schedule is being purposefully created by
+a `planner` for the upcoming semester.
 
 `Standard operations` on a system entity are creating, modifying, removing
 and viewing.
@@ -61,18 +58,17 @@ should provide ability to..."
 
 - Provide friendly user interface.
 
-- Manage system resources, users and user permissions.
+- Manage module resources, users and user permissions.
 
-- Perform standard operations on `subjects`, `rooms`, `schedule sheets`.
+- Perform standard operations on `subjects`, `rooms` and `schedule sheets`.
 
-- Create free of conflicts `central schedules` based on `studying plans` and
+- Create conflict-free `central schedules` based on `studying plans` and
   other constraints.
-
-- Create `student schedules` by enrolling in available `schedule sheets`.
 
 - Add constraints on `central schedules`.
 
-- Import `student schedule` and other views in different formats.
+- Import and view `central schedules` (weekly, monthly, etc.) and information
+  about other module entities in different formats.
 
 ### System requirements
 
@@ -90,62 +86,71 @@ has been authorized via central authorization module before accessing it.
 
 - Restart and shut down the `Scheduling` module.
 
-- Perform standard operations on user profiles.
+- Enrich profiles from central record module with additional information
+  associated with module `Scheduling`.
 
-- Modify profile system role. Administrator role can assign roles to other
+- Modify profile module role. Administrator role can assign roles to other
   profiles. The module is initialized with one `root` administrator profile.
-
-- Interconnect `Scheduling` profiles with profiles from central record module
-  and synchronize imported data.
 
 **Planning activities**
 
-- Perform standard operations on a subject. By modifying a subject we mean
+- Perform standard operations on `subjects`. By modifying a subject we mean
   updating information (description, sylabus, amount of e-credits, guarantor,
-  etc.). A subject might be mandatory for some 
+  etc.). Subject can be recommended for a specific semester as students
+  progress or `studying plan`.
 
-- Perform standard operations on a room. Rooms might symbolize either physical
-  or virtual (zoom session) place.
+- Perform standard operations on `rooms`. Room capacity shall be specified
+  as a constraint for all physical rooms and might be specified for virtual
+  rooms on demand.
 
-- Perform standard operations on a `studying plan` after all necessary subjects
-  are defined. A planner could mark subject as must-be-planned, meaning these
-  subjects will be considered during automatic planning or will be highlighted
-  during manual planning.
+- Perform standard operations on `studying plans` after all necessary
+  `subjects` are created.
 
-- Create `central schedule` in automatic mode by using `studying plans`,
-  list of must-be-planned subjects and constraints given by the `teachers`.
+- Perform standard operations on `schedule sheets`. Total capacity for
+  a particular `subject` shall reflect `studying plans` as well as estimated
+  students' interest in enrolling in the subject. All `schedule sheets`
+  created for the current semester must be assigned to some `schedule triple`.
+  Impossibility for such assignment is a severe conflict, which prevents
+  `central schedule` to be constructed.
+
+- Create `central schedule` in automatic mode by using `schedule sheets` and
+  and other constraints.
 
 - Create and modify `central schedule` in manual mode. Manual mode assumes,
-  that `schedule sheets` will be created, removed or modified one-by-one.
+  that `schedule triples` will be created, removed or modified one-by-one.
+  Correctness could be verified at any time.
+
+- Created `schedule triples` shall ensure, that students are able to visit
+  all subjects from `studying plan` planned for the current semester.
+
+- Save created `central schedule`, remove it to start all over, release it
+  to other modules and university personnel.
 
 **Student activities**
 
-TODO ...
+- View available information about `subjects`, `rooms` and `schedule sheets`.
 
-- Viewing information about subjects, rooms, schedule sheets and.
+- View `studying plan` with additional information about already passed
+  mandatory subjects.
 
-- List ...
+- View `central schedule` released by a planner.
 
-- Construct `student schedule` by selecting any subjects available in the
-  current semester. At this point, `central schedule` already exists.
-  Enrollment is not possible if number of enrolled students exceeds the room
-  capacity.
-
-- Register in waiting list for a particular `schedule sheet` if room capacity
-  exceeds. The student
-
-- 
-
-- Enroll in additional subjects of choice even though conflicts arise.
+- Maintain a bin of `schedule triples` for the current semester with ability
+  to add, and remove them without any restrictions. A bin is used for
+  constructing preliminary student schedule, actual construction happens
+  within `Enrollment` module.
 
 **Teacher activities**
 
-- 
+- TBA
+
+**Reporting activities**
+
+- TBA
 
 #### Actors
 
-We define several kinds of actors: administrator, guest, student, teacher and
-planner.
+We define several kinds of actors: administrator, planner, student and teacher.
 
 ##### Actor: Administrator
 
@@ -154,16 +159,11 @@ tasks, such as user administration, deployment of new module versions.
 Synchronization with other modules is performed automatically and in a daily
 basis.
 
-##### Actor: Guest
-
-`Guest` is an unauthorized actor with limited abilities to search and view
-subject information.
-
 ##### Actor: Planner
 
 `Planner` is an actor performing **planning activities**. In general, it is
-an authority, who defines subjects, rooms, studying plans, schedule sheets
-and schedules taking into account constraints from teachers (unavailability).
+an authority, who defines `subjects`, `rooms`, `studying plans`,
+`schedule sheets` and schedules taking into account introduced constraints.
 
 ##### Actor: Student
 
