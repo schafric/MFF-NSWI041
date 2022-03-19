@@ -72,23 +72,16 @@ provide ability to..."
 
 We use approach similar to the previous chapter.
 
-- Import vital information about existing profiles from central record module.
-- Enrich imported profiles by `Scheduling` metadata (role, etc.)
-
+- import vital information about existing profiles from central record module.
+- enrich imported profiles by `Scheduling` metadata (role, etc.)
 - 
-- The system provides modern web interface with all functionality necessary for
-the operation.
-
-- A valid schedule spans standard semester, either winter or summer.
-
-
-- 
-
-- 
-
-- Verify if timetable 
-
-- 
+- the system provides modern web interface with all functionality necessary for
+the operation
+- a valid schedule spans standard semester, either winter or summer.
+-
+- verify if timetable does not contain any collision (overlapping subjects)
+- inform user about about collisions (if any) in `Schedule Sheet`
+- create list of all enrolled students for each subject
 
 #### Actors
 
@@ -99,25 +92,42 @@ planner.
 
 ##### Actor: Administrator
 
+Administrator will be able to:
 
+- set a deadline for enrollment and changes of schedules
 
 ##### Actor: Guest
 
-Guest is an actor with limited abilities, such as viewing subjects
+Guest is an actor with limited abilities, such as viewing subjects and their schedules.
 
 ##### Actor: Student
 
-The student should be able to do the following activities.
+The student should be able to do the following activities:
 
-- View all available subjects, filter and group them by a criterion selected from available metadata.
-- 
+- view all available subjects, filter and group them by a criterion selected from available metadata
+- view all available subjects, filter them and add them to `Schedule Sheet`
+- enroll in a particular subject
+- unenroll from particular subject
+- if the enrollment limit has been reached, student is added to a waiting list
+and will be automatically enrolled when the limit allows it
+- sign out from a waiting list
+
+##### Actor: Teacher
+
+The teacher is an actor able to:
+
+- create a new subject and schedule for it
+- change the schedule of already scheduled subject
+- remove a subject from schedule
+- enroll student in a subject even if the enrollment limit has been reached
 
 ##### Actor: Planner
 
-Planner is an actor with the following abilities.
+Planner is an actor with the following abilities:
 
-- Perform standard operations on a subject. By modifying a subject we mean to update metadata, such as description, advancement, , etc.
-- Create 
+- perform standard operations on a subject, by modifying a subject we mean to update metadata, such as description, advancement, etc.
+- create and change schedules for any subject
+- change the list of active (currently taught) subjects
 
 #### Use cases
 
