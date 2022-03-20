@@ -246,6 +246,7 @@ further instructions, links to external services (e.g. moodle, one drive) etc.
 ##### 5. Planner can schedule subjects manually
 
 Planner can create schedule sheets according to the studying plan for current term.
+Planner has a subject from studying plan he needs to schedule. He fills in a capacity, thus creating schedule sheet with unique ID. Capacity of various subjects may differ, lectures will usually have greater capacity than tutorials. Schedule sheets don´t need to be scheduled immediately and may be created at any time.
 
 ```plantuml
 @startuml
@@ -263,6 +264,7 @@ Create .> Plan : include
 ##### 6. Planner can assign schedule sheet to a schedule triple
 
 Planner can assign schedule sheet to a schedule triple and system will automatically check availability of assigned room during specified time slot.
+When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically based on capacity constraint. System will automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
 
 ```plantuml
 @startuml
@@ -281,7 +283,7 @@ Planner --> Triple
 
 ##### 7. Planner can assign schedule sheet to a schedule triple
 
-Planner can assign schedule sheet to a schedule triple and system will automatically check for conflicts with other compulsory subjects according to the studying plan within a given time slot.
+Planner can assign schedule sheet to a schedule triple. There must be no conflicts among subjects taught at the same term which are compulsory according to the studying plan. System will not accept schedule triple, if it is in conflict with already registered schedule triple.
 
 ```plantuml
 @startuml
