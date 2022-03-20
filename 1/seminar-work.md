@@ -209,6 +209,7 @@ The integrated diagram
 @startuml
 left to right direction
 actor Student as s
+actor Teacher as t
 package Scheduler {
   usecase "Show Schedule" as UC1
   usecase "Print schedule for given semester" as UC2
@@ -218,7 +219,7 @@ package Scheduler {
 s --> UC1
 s --> UC2
 s --> UC3
-s --> UC4
+t --> UC4
 @enduml
 ```
 
