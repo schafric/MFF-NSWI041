@@ -190,20 +190,21 @@ non-mandatory constraints into planning process and can view planning entities.
 
 We define define the following use cases.
 
-01. Student can preview schedule
-02. Student can export schedule to PDF
-03. Student can open detail of schedule-triple
-04. Teacher can edit metadata about schedule-triple
-05. 
-06. 
-07. 
-08. 
-09. 
+ 1. Student can preview schedule
+ 2. Student can export schedule to PDF
+ 3. Student can open detail of schedule-triple
+ 4. Teacher can edit metadata about schedule-triple
+ 5. 
+ 6. 
+ 7. 
+ 8. 
+ 9. 
 10. 
 11. 
 12. 
 
-The integrated diagram 
+The following figure is an integrated diagram containing all use cases
+described in the following chapters.
 
 ```plantuml
 @startuml
@@ -249,30 +250,30 @@ services (e.g. moodle, one drive) etc.
 
 
 
-###### 06. 
+##### 06. 
 
 
 
-###### 07. 
+##### 07. 
 
 
 
-###### 08. 
+##### 08. 
 
 
 
-###### 09. 
+##### 09. 
 
 
 
-###### 10. 
+##### 10. 
 
 
 
-###### 11. 
+##### 11. 
 
 
 
-###### 12. 
+##### 12. 
 
 
