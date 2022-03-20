@@ -188,96 +188,90 @@ non-mandatory constraints into planning process and can view planning entities.
 
 #### Use cases
 
-[*Document here all use cases. Create a subsection for each use case diagram. If you have only one use case diagram, you do not need a special subsection*]
+We define define the following use cases.
 
-##### [*Use case diagram title*]
+01. Student can preview schedule
+02. Student can export schedule to PDF
+03. Student can open detail of schedule-triple
+04. Teacher can edit metadata about schedule-triple
+05. 
+06. 
+07. 
+08. 
+09. 
+10. 
+11. 
+12. 
 
-[*Use case diagram in PlantUML*]
+The integrated diagram 
 
-```plantuml
-@startuml
-left to right direction
-actor Guest as g
-package Professional {
-  actor Chef as c
-  actor "Food Critic" as fc
-}
-package Restaurant {
-  usecase "Eat Food" as UC1
-  usecase "Pay for Food" as UC2
-  usecase "Drink" as UC3
-  usecase "Review" as UC4
-  usecase "Cook Food" as UC5
-}
-c --> UC5
-fc --> UC4
-g --> UC1
-g --> UC2
-g --> UC3
-@enduml
-```
-
-To be able to embed PlantUML diagrams to Markdown code with previews in VSCode you need
-* Markdown All in One extension
-* PlantUML extension
-* Markdown Plantuml Preview extension
-
-Follow https://plantuml.com/
-
-[*Describe the diagram in a short paragraph. Describe each use case from the diagram in the detail from the lecture in a separate subsection.*]
-
-###### [*Use case title*]
-
-[*Use case description in the structure from the lecture.*]
-
-### Student can preview schedule
-Student can preview schedule for given semester where he/she can see all subject triples in which he/she enrolled.
 ```plantuml
 @startuml
 left to right direction
 actor Student as s
 package Scheduler {
-  usecase "Show Schedule" as SS
+  usecase "Show Schedule" as UC1
+  usecase "Print schedule for given semester" as UC2
+  usecase "Preview schedule-triple detail" as UC3
+  usecase "Edit subject-triple detail" as UC4
 }
-s --> SS
+s --> UC1
+s --> UC2
+s --> UC3
+s --> UC4
 @enduml
 ```
 
-### Student can export schedule to PDF
-Student can export detailed schedule for the whole semester into PDF format - for example for printing it out on paper.
-```plantuml
-@startuml
-left to right direction
-actor Student as s
-package Scheduler {
-  usecase "Print schedule for given semester" as SS
-}
-s --> SS
-@enduml
-```
+##### 01. Student can preview schedule
 
-### Student can open detail of schedule-triple
-Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher.
-```plantuml
-@startuml
-left to right direction
-actor Student as s
-package Scheduler {
-  usecase "Preview schedule-triple detail" as SS
-}
-s --> SS
-@enduml
-```
+Student can preview schedule for given semester where he/she can see all
+subject triples in which he/she enrolled.
 
-### Teacher can edit metadata about schedule-triple
-Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with further instructions, links to external services (e.g. moodle, one drive) etc.
-```plantuml
-@startuml
-left to right direction
-actor Teacher as t
-package Scheduler {
-  usecase "Edit subject-triple detail" as SS
-}
-t --> SS
-@enduml
-```
+##### 02. Student can export schedule to PDF
+
+Student can export detailed schedule for the whole semester into PDF format
+- for example for printing it out on paper.
+
+##### 03. Student can open detail of schedule-triple
+
+Student can preview detail of given schedule-triple which can contain
+additional information about this specific schedule-triple - for example
+reading some further description/instruction from teacher.
+
+##### 04. Teacher can edit metadata about schedule-triple
+
+Teacher can edit several metadata about schedule-triple of subject they teach
+- for example providing students with further instructions, links to external
+services (e.g. moodle, one drive) etc.
+
+##### 05. 
+
+
+
+###### 06. 
+
+
+
+###### 07. 
+
+
+
+###### 08. 
+
+
+
+###### 09. 
+
+
+
+###### 10. 
+
+
+
+###### 11. 
+
+
+
+###### 12. 
+
+
