@@ -287,14 +287,11 @@ Planner can assign schedule sheet to a schedule triple and system will automatic
 @startuml
 left to right direction
 actor Planner
-
 package Schedule {
     usecase "Check time slot" as Check
     usecase "Create schedule triple" as Create
-    
     usecase "Create schedule sheet" as Sheet
 }
-
 Planner --> Create
 Create .> Check : include
 Sheet <. Create : include
