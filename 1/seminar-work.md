@@ -131,7 +131,7 @@ has been authorized via central authorization module before accessing it.
 - View available information about `subjects`, `rooms` and `schedule sheets`.
 
 - View `central schedule` released by a planner entirely, or filtered by
-  various criterions.
+  various criterias.
 
 **Specific student activities**
 
@@ -148,6 +148,8 @@ has been authorized via central authorization module before accessing it.
 - Introduce unavailability constraints into a prepared `central schedule`.
   Such constraints will be considered while creating `schedule triples`, but
   are not mandatory for a `planner`.
+
+- Adjust metadata about `schedule-triples` - for example adding links for student enrolled in that triple (to third parties like moodle, one drive etc.), providing them with further instructions or information.
 
 **Reporting activities**
 
@@ -227,3 +229,55 @@ Follow https://plantuml.com/
 ###### [*Use case title*]
 
 [*Use case description in the structure from the lecture.*]
+
+### Student can preview schedule
+Student can preview schedule for given semester where he/she can see all subject triples in which he/she enrolled.
+```plantuml
+@startuml
+left to right direction
+actor Student as s
+package Scheduler {
+  usecase "Show Schedule" as SS
+}
+s --> SS
+@enduml
+```
+
+### Student can export schedule to PDF
+Student can export detailed schedule for the whole semester into PDF format - for example for printing it out on paper.
+```plantuml
+@startuml
+left to right direction
+actor Student as s
+package Scheduler {
+  usecase "Print schedule for given semester" as SS
+}
+s --> SS
+@enduml
+```
+
+### Student can open detail of schedule-triple
+Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher.
+```plantuml
+@startuml
+left to right direction
+actor Student as s
+package Scheduler {
+  usecase "Preview schedule-triple detail" as SS
+}
+s --> SS
+@enduml
+```
+
+### Teacher can edit metadata about schedule-triple
+Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with further instructions, links to external services (e.g. moodle, one drive) etc.
+```plantuml
+@startuml
+left to right direction
+actor Teacher as t
+package Scheduler {
+  usecase "Edit subject-triple detail" as SS
+}
+t --> SS
+@enduml
+```
