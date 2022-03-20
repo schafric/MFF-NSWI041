@@ -131,7 +131,7 @@ has been authorized via central authorization module before accessing it.
 - View available information about `subjects`, `rooms` and `schedule sheets`.
 
 - View `central schedule` released by a planner entirely, or filtered by
-  various criterias.
+  various criteria.
 
 **Specific student activities**
 
@@ -194,9 +194,9 @@ We define define the following use cases.
  2. Student can export schedule to PDF.
  3. Student can open detail of schedule-triple.
  4. Teacher can edit metadata about schedule-triple.
- 5. 
- 6. 
- 7. 
+ 5. Planner can schedule subjects manually.
+ 6. Planner can asssign schedule sheet to a schedule triple with check of room availability.
+ 7. Planner can assign schedule sheet to a schedule triple with check of conflicts with other compulsory subjects.
  8. 
  9. 
 10. 
