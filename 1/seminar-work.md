@@ -243,17 +243,63 @@ schedule-triple - for example reading some further description/instruction from 
 Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with
 further instructions, links to external services (e.g. moodle, one drive) etc.
 
-##### 5. 
+##### 5. Planner can schedule subjects manually
 
+Planner can create schedule sheets according to the studying plan for current term.
 
+```plantuml
+@startuml
+left to right direction
+actor Planner
+package Schedule {
+    usecase "Select subject from studying plan" as Plan
+    usecase "Create schedule sheet" as Create 
+}
+Planner --> Create
+Create .> Plan : include
+@enduml
+```
 
-##### 6. 
+##### 6. Planner can assign schedule sheet to a schedule triple
 
+Planner can assign schedule sheet to a schedule triple and system will automatically check availability of assigned room during specified time slot.
 
+```plantuml
+@startuml
+left to right direction
+actor Planner
+package Schedule {
+    usecase "Check room availability" as Check    
+    usecase "Create schedule triple" as Triple
+    usecase "Create schedule sheet" as Sheet
+}
+Triple .> Check : include
+Sheet <. Triple : include
+Planner --> Triple
+@enduml
+```
 
-##### 7. 
+##### 7. Planner can assign schedule sheet to a schedule triple
 
+Planner can assign schedule sheet to a schedule triple and system will automatically check for conflicts with other compulsory subjects according to the studying plan within a given time slot.
 
+```plantuml
+@startuml
+left to right direction
+actor Planner
+
+package Schedule {
+    usecase "Check time slot" as Check
+    usecase "Create schedule triple" as Create
+    
+    usecase "Create schedule sheet" as Sheet
+}
+
+Planner --> Create
+Create .> Check : include
+Sheet <. Create : include
+@enduml
+```
 
 ##### 8. 
 
