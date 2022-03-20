@@ -264,7 +264,7 @@ Create .> Plan : include
 ##### 6. Planner can assign schedule sheet to a schedule triple
 
 Planner can assign schedule sheet to a schedule triple and system will automatically check availability of assigned room during specified time slot.
-When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically based on capacity constraint. System will automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
+When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically (based on capacity constraint). System will automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
 
 ```plantuml
 @startuml
