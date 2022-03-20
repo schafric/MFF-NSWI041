@@ -190,10 +190,10 @@ non-mandatory constraints into planning process and can view planning entities.
 
 We define define the following use cases.
 
- 1. Student can preview schedule
- 2. Student can export schedule to PDF
- 3. Student can open detail of schedule-triple
- 4. Teacher can edit metadata about schedule-triple
+ 1. Student can preview schedule.
+ 2. Student can export schedule to PDF.
+ 3. Student can open detail of schedule-triple.
+ 4. Teacher can edit metadata about schedule-triple.
  5. 
  6. 
  7. 
@@ -224,45 +224,42 @@ t --> UC4
 @enduml
 ```
 
-##### 01. Student can preview schedule
+##### 1. Student can preview schedule
 
 Student can preview schedule for given semester where he/she can see all
 subject triples in which he/she enrolled.
 
-##### 02. Student can export schedule to PDF
+##### 2. Student can export schedule to PDF
 
-Student can export detailed schedule for the whole semester into PDF format
-- for example for printing it out on paper.
+Student can export detailed schedule for the whole semester into PDF format - for example for printing it out on paper.
 
-##### 03. Student can open detail of schedule-triple
+##### 3. Student can open detail of schedule-triple
 
-Student can preview detail of given schedule-triple which can contain
-additional information about this specific schedule-triple - for example
-reading some further description/instruction from teacher.
+Student can preview detail of given schedule-triple which can contain additional information about this specific
+schedule-triple - for example reading some further description/instruction from teacher.
 
-##### 04. Teacher can edit metadata about schedule-triple
+##### 4. Teacher can edit metadata about schedule-triple
 
-Teacher can edit several metadata about schedule-triple of subject they teach
-- for example providing students with further instructions, links to external
-services (e.g. moodle, one drive) etc.
+Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with
+further instructions, links to external services (e.g. moodle, one drive) etc.
 
-##### 05. 
+##### 5. 
 
 
 
-##### 06. 
+##### 6. 
 
 
 
-##### 07. 
+##### 7. 
 
 
 
-##### 08. 
+##### 8. 
 
 
 
-##### 09. 
+##### 9. 
 
 
 
