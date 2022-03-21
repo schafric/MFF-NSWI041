@@ -133,13 +133,16 @@ has been authorized via central authorization module before accessing it.
 - View `central schedule` released by a planner entirely, or filtered by
   various criteria.
 
+- Subscribe to receive e-mail notifications about changes in schedulling
+  of `schedule sheets` that student is enrolled in.
+
 **Specific student activities**
 
 - View `studying plan` with additional information about already passed
   mandatory subjects.
 
-- Maintain a bin of `schedule triples` for the current semester with ability
-  to add, and remove them without any restrictions. A bin is used for
+- Maintain a basket of `schedule triples` for the current semester with ability
+  to add, and remove them without any restrictions. A basket is used for
   constructing preliminary student schedule, actual construction happens
   within `Enrollment` module.
 
@@ -200,9 +203,8 @@ We define define the following use cases.
  8. Administrator updates module version.
  9. Teacher introduces unavailability constraints.
 10. Planner generates `central schedule` via solver.
-11. 
-12. 
-
+11. Student can edit his schedule basket.
+12. Teacher can schedule non-centrally planned subjects.
 The following figure is an integrated diagram containing all use cases
 described in the following chapters.
 
@@ -224,6 +226,8 @@ package Scheduler {
   usecase "8. Administrator updates version" as UC8
   usecase "9. Teacher's unavailability" as UC9
   usecase "10. Generate central schedule" as UC10
+  usecase "11. Edit schedule basket" as UC11
+  usecase "12. Schedule non-centrally planned subjects" as UC12
 }
 s --> UC1
 s --> UC2
@@ -235,6 +239,8 @@ p --> UC7
 a --> UC8
 t --> UC9
 p --> UC10
+s --> UC11
+t --> UC12
 @enduml
 ```
 
@@ -441,10 +447,53 @@ are created and set.
 
 Conflict-free and modifiable `central schedule` is created.
 
-##### 11. 
+##### 11. Student can edit his schedule basket
 
+A student can mantain a basket of `schedule sheets` he is interested in enrolling. The basket serves as preliminary schedule and helps a student with planning a schedule for upcoming semester.
+To add subject to the basket, student must search for subject in `central schedule` and open detail view. System displays a list of `schedule sheets` belonging to the subject. Then student selects the `schedule sheet` and `add to basket`. System adds it to basket. Removing schedule sheet from basket can be requested when viewing the basket.
 
+```plantuml
+@startuml
+left to right direction
+actor Student
+package Schedule {
+    usecase "Add schedule sheet to basket" as Add  
+    usecase "Edit schedule basket" as Edit
+    usecase "Remove schedule sheet from basket" as Remove
+}
+Student --> Edit
+Edit .> Add : include
+Remove <. Edit : include
+@enduml
+```
 
-##### 12. 
+##### 12. Teacher can schedule non-centrally planned subjects
 
+Some elective subjects are not planned centrally, because these subjects are very specialized and a few students are expected to enroll.
 
+The schedulling is done by assigning `schedule sheet` to `schedule triple` like the planner does.
+
+**Input**
+
+The user is logged as a `teacher`. `Central schedule` is released
+and achedulling of non-centrally planned subjects is allowed.
+
+**Normal**
+
+1. The user opens `schedule sheet` 
+
+2. The user specifies room, timeslot, and creates new `schedule triple`
+
+3. The user saves `schedule triple`, assigning it to `schedule sheet`
+
+**Wrong**
+
+1. The room is already occupied by a `schedule triple` from `central schedule`.
+  System notifies user, `schedule triple` is not assigned to `schedule sheet`.
+
+2. Teacher is already teaching in specified time slot.
+  System notifies user, `schedule triple` is not assigned to `schedule sheet`.
+
+**Output**
+
+`Schedule sheet` is assigned new `schedule triple`.
