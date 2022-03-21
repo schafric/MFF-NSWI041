@@ -195,11 +195,11 @@ We define define the following use cases.
  3. Student can open detail of schedule-triple.
  4. Teacher can edit metadata about schedule-triple.
  5. Planner can schedule subjects manually.
- 6. Planner can asssign schedule sheet to a schedule triple with check of room availability.
+ 6. Planner can assign schedule sheet to a schedule triple with check of room availability.
  7. Planner can assign schedule sheet to a schedule triple with check of conflicts with other compulsory subjects.
- 8. 
- 9. 
-10. 
+ 8. Administrator updates module version.
+ 9. Teacher introduces unavailability constraints.
+10. Planner generates `central schedule` via solver.
 11. 
 12. 
 
@@ -209,18 +209,32 @@ described in the following chapters.
 ```plantuml
 @startuml
 left to right direction
+actor Administrator as a
+actor Planner as p
 actor Student as s
 actor Teacher as t
 package Scheduler {
-  usecase "Show Schedule" as UC1
-  usecase "Print schedule for given semester" as UC2
-  usecase "Preview schedule-triple detail" as UC3
-  usecase "Edit subject-triple detail" as UC4
+  usecase "1. Show Schedule" as UC1
+  usecase "2. Print schedule for given semester" as UC2
+  usecase "3. Preview schedule-triple detail" as UC3
+  usecase "4. Edit subject-triple detail" as UC4
+  usecase "5. Planner schedules manually" as UC5
+  usecase "6. Planner schedule triple 1" as UC6
+  usecase "7. Planner schedule triple 2" as UC7
+  usecase "8. Administrator updates version" as UC8
+  usecase "9. Teacher's unavailability" as UC9
+  usecase "10. Generate central schedule" as UC10
 }
 s --> UC1
 s --> UC2
 s --> UC3
 t --> UC4
+p --> UC5
+p --> UC6
+p --> UC7
+a --> UC8
+t --> UC9
+p --> UC10
 @enduml
 ```
 
@@ -300,17 +314,132 @@ Sheet <. Create : include
 @enduml
 ```
 
-##### 8. 
+##### 8. Administrator updates module version
 
+```plantuml
+@startuml
+left to right direction
+actor Administrator as a
+package Schedule {
+    usecase "Update version" as v
+    usecase "Configure module" as c
+    usecase "Start module" as s
+}
+a --> v
+v .> c : include
+c .> s : include
+@enduml
+```
 
+**Input**
 
-##### 9. 
+The user is logged as an `administrator`. The module `Scheduling` is under
+normal operation.
 
+**Right**
 
+1. Administrator issues a command to stop service.
 
-##### 10. 
+2. Service releases broadcast message to other services about the matter.
 
+3. Other services confirm, that all relations are finished and cancelled.
 
+4. Service reports acknowledgement back to the administrator and goes down.
+
+5. Administrator installs updated version via central repository.
+
+6. Administrator starts new service process with previous configuration.
+
+7. Service releases broadcast message to other services about the matter.
+
+8. Other services respond on the message positively.
+
+9. Service reports acknowledgement back to the administrator.
+
+**Wrong**
+
+1. Some of the long-lasting relations cannot be finalized, the module rejects shutdown.
+
+2. Updated version cannot be installed due to internal errors. The entire
+  module shall be uninstalled and installed from scratch.
+
+3. Updated version of the module cannot be started due to an internal error.
+  The administrator should study system log and contact support if it does
+  not help.
+
+**Result**
+
+New version of the module is installed and under normal operation.
+
+##### 9. Teacher introduces unavailability constraints
+
+**Input**
+
+The user is logged as a `teacher`. The `central schedule` is released for
+introducing teachers constraints.
+
+**Normal**
+
+1. The user opens `central schedule` for adding constraints.
+
+2. The user introduce a time span with two time stamps, start and finish of
+  an availability.
+
+3. The user saves introduced constraints.
+
+**Wrong**
+
+1. Two overlapped time spans result in a conflict. The module kindly informs
+  the user, however conflict might remain unsolved.
+
+**Output**
+
+Planner is informed about optional teacher's unavailability.
+
+##### 10. Planner generates `central schedule` via solver
+
+```plantuml
+@startuml
+left to right direction
+actor Planner as p
+package Schedule {
+    usecase "Create studying plans" as C
+    usecase "Generate central schedule" as G
+    usecase "Intro constraints" as I
+}
+p --> G
+G .> C : include
+G .> I : include
+@enduml
+```
+
+**Input**
+
+The user is logged as `planner`. All necessary `studying plans` and constraints
+are created and set.
+
+**Normal**
+
+1. Planner creates empty `central schedule`.
+
+2. Planner issue request to the `solver`.
+
+3. Solver resolves system of constraints and returns a set of `central schedules`.
+
+4. Planner saves the most appropriate option, which might be modified later.
+
+**Wrong**
+
+1. Constraints or `studying plans` cannot be satisfied, planner shall relax
+  constraints or modify `studying plans`. Teacher constraints are considered
+  non-mandatory.
+
+2. Solver service exceeds timeout for responding. Planner should try to
+  issue a new request or relax constraints.
+
+**Output**
+
+Conflict-free and modifiable `central schedule` is created.
 
 ##### 11. 
 
