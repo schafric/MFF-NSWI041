@@ -243,19 +243,59 @@ p --> UC10
 Student can preview schedule for given semester where he/she can see all
 subject triples in which he/she enrolled.
 
+**Right**
+1. Student will see a webpage containing schedule for his/her semester
+
+**Wrong**
+1. Student would see someone elses schedule.
+2. There would be some enrolled triples missing.
+
+**Result**
+- 
+
 ##### 2. Student can export schedule to PDF
 
 Student can export detailed schedule for the whole semester into PDF format - for example for printing it out on paper.
 
+
+**Right**
+1. PDF file will get downloaded to student's device containing the full schedule for semester.
+
+**Wrong**
+1. Student would download someone elses schedule.
+2. There would be some enrolled triples missing.
+
+**Result**
+- 
 ##### 3. Student can open detail of schedule-triple
 
-Student can preview detail of given schedule-triple which can contain additional information about this specific
-schedule-triple - for example reading some further description/instruction from teacher.
+Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher.
+
+**Right**
+1. Student will see a webpage containing details of given schedule-triple.
+
+**Wrong**
+1. Student would not have access to details of given schedule-tripple
+2. There would be some metadata missing.
+
+**Result**
+- 
 
 ##### 4. Teacher can edit metadata about schedule-triple
 
-Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with
-further instructions, links to external services (e.g. moodle, one drive) etc.
+Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with further instructions, links to external services (e.g. moodle, one drive) etc.
+
+**Right**
+1. Teacher will see a form for filling details about given schedule-triple.
+2. Teacher will be able to fill the form and save the data.
+
+**Wrong**
+1. Teacher would not see the editing form.
+2. Saving the form would fail for some reason.
+3. Saving the form would succeed but data would not be saved consistently.
+
+**Result**
+- 
 
 ##### 5. Planner can schedule subjects manually
 
