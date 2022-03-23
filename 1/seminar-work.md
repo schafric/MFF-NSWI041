@@ -36,6 +36,36 @@ a `planner` for the upcoming semester.
 `Standard operations` on a system entity are creating, modifying, removing
 and viewing.
 
+The following diagram shows important objects and how they are related.
+
+```plantuml
+@startuml
+object Subject
+object Room
+object "Studying plan" as StudyingPlan
+object Semester
+object "Schedule sheet" as ScheduleSheet
+object "Schedule triple" as ScheduleTriple
+object Schedule
+object "Central schedule" as CentralSchedule
+object "Time span" as TimeSpan
+
+Room : capacity
+ScheduleSheet : capacity
+
+StudyingPlan "0..*" --> "0..*" Semester
+Semester "0..*" --> "0..*" Subject
+CentralSchedule --|> Schedule
+Schedule "0..*" --> "0..*" ScheduleTriple
+ScheduleTriple "0..1" --> "1" ScheduleSheet
+ScheduleTriple "0..*" --> "1" Room
+ScheduleTriple "0..*" --> "1" TimeSpan
+Subject "1" --> "0..*" ScheduleSheet
+
+
+@enduml
+```
+
 ## Functional Requirements
 
 This section specifies the functional requirements.
