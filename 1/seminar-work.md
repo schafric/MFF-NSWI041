@@ -545,25 +545,57 @@ The schedulling is done by assigning `schedule sheet` to `schedule triple` like 
 
 **Input**
 
-The user is logged as a `teacher`. `Central schedule` is released
-and achedulling of non-centrally planned subjects is allowed.
+`Central schedule` is published and schedulling
+of non-centrally planned subjects is allowed.
+The user is logged in and has a `teacher` role.
 
 **Normal**
 
-1. The user opens `schedule sheet` 
+* User chooses schedule sheet he wants to schedule.
 
-2. The user specifies room, timeslot, and creates new `schedule triple`
+* System displays a schedulling form for selected schedule sheet.
 
-3. The user saves `schedule triple`, assigning it to `schedule sheet`
+* User specifies room and time span for the schedule sheet
+  - by manualy typing name of the room and time span into the form.
+  - interactively: the system displays schedule for the semester. Schedule can be viewed by day and building. Free slots in rooms with suitable capacity will be highlighted. User selects free slot. System populates the form with selected room and time span.
+
+* User submits the form.
+* System checks for conflicts.
 
 **Wrong**
 
-1. The room is already occupied by a `schedule triple` from `central schedule`.
+1. The room is already occupied in specified time span.
   System notifies user, `schedule triple` is not assigned to `schedule sheet`.
 
-2. Teacher is already teaching in specified time slot.
+2. Room does not have sufficient capacity. 
   System notifies user, `schedule triple` is not assigned to `schedule sheet`.
 
 **Output**
 
 `Schedule sheet` is assigned new `schedule triple`.
+
+```plantuml
+@startuml
+|#AntiqueWhite|t|teacher
+start
+:Choose a schedule sheet;
+|#PowderBlue|s|system
+:Display schedulling form;
+|t|
+if () then
+  :Fill the form manually;
+else
+  |s|
+  :Display schedule;
+  |t|
+  :Select free time slot;
+  |s|
+  :Populate the form;
+endif
+|t|
+:Submit the form;
+|s|
+:Check for conflicts;
+stop
+@enduml
+```
