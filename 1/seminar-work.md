@@ -333,10 +333,19 @@ Teacher can edit several metadata about schedule-triple of subject they teach - 
 **Result**
 - 
 
-##### 5. Planner can schedule subjects manually
+##### 5. Planner can create schedule sheet
 
 Planner can create schedule sheets according to the studying plan for current term.
 Planner has a subject from studying plan he needs to schedule. He fills in a capacity, thus creating schedule sheet with unique ID. Capacity of various subjects may differ, lectures will usually have greater capacity than tutorials. Schedule sheets don´t need to be scheduled immediately and may be created at any time.
+
+**Right**
+1. Planner will see all available subjects.
+2. Planner will be able to choose a subject and create schedule sheet for it.
+
+**Wrong**
+1. Planner would not have access to the list of subjects or studying plan.
+2. Creating of schedule sheet would fail.
+3. Creating a schedule sheet would succeed, but these changes would not be reflected in the system. 
 
 ```plantuml
 @startuml
@@ -356,16 +365,23 @@ Create .> Plan : include
 Planner can assign schedule sheet to a schedule triple and system will automatically check availability of assigned room during specified time slot.
 When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically (based on capacity constraint). System will automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
 
+**Right**
+1. Planner can see all schedule sheets and schedule triples.
+2. Planner can choose schedule sheet and assign it to time slot and room.
+
+**Wrong**
+1. Planner would not be able to see schedule sheets or schedule triples.
+2. Assigning time slot and room to a schedule sheet would fail for some reason.
+3. Creating of schedule triple would be successful, however, these changes would not be reflected in the system.
+
 ```plantuml
 @startuml
 left to right direction
 actor Planner
 package Schedule {
-    usecase "Check room availability" as Check    
     usecase "Create schedule triple" as Triple
     usecase "Create schedule sheet" as Sheet
 }
-Triple .> Check : include
 Sheet <. Triple : include
 Planner --> Triple
 @enduml
