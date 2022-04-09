@@ -331,6 +331,36 @@ Teacher can edit several metadata about schedule-triple of subject they teach - 
 
 **Result**
 
+```
+@startuml
+|#AntiqueWhite|t|Teacher
+start
+:Choose a schedule triple;
+|#PowderBlue|s|System
+:Display details;
+|t|
+:Choose metadata category;
+|s|
+:Display form for modifying metadata;
+|t|
+:Modify/add metadata;
+|s|
+:Populate the form;
+|t|
+if () then
+    |t|
+    :Discard changes;
+    stop
+else
+    |t|
+    :Submit the form;
+    |s|
+    :Save changes;
+    stop
+endif
+@enduml
+```
+
 ##### 5. Planner can create schedule sheet
 
 Planner can create schedule sheets according to the studying plan for current term.
@@ -347,6 +377,7 @@ Planner has a subject from studying plan he needs to schedule. He fills in a cap
 4. Creating a schedule sheet succeeds, but these changes are not reflected in the system. 
 
 **Result**
+
 Schedule sheet is successfully created for given subject.
 
 ```plantuml
@@ -359,6 +390,39 @@ package Schedule {
 }
 Planner --> Create
 Create .> Plan : include
+@enduml
+```
+
+```
+@startuml
+|#AntiqueWhite|p|Planner
+start
+|#PowderBlue|s|System
+|p|
+:Enter scheduling form;
+|s|
+:Display subjects;
+|p|
+:Choose a subject;
+|s|
+:Display scheduling form;
+|p|
+:Fill in capacity;
+|s|
+:Populate the form;
+if () then
+    |p|
+    :Discard changes;
+    stop
+else
+    |p|
+    :Submit the form;
+endif
+|s|
+:Create unique ID;
+|s|
+:Create schedule sheet;
+stop
 @enduml
 ```
 
@@ -377,6 +441,7 @@ When schedule sheet with unique ID has been created, it can be paired with room.
 3. Creating of schedule triple succeeds, however, these changes are not reflected in the system.
 
 **Result**
+
 Schedule triple is successfully created by assigning time slot and room to a schedule sheet.
 
 ```plantuml
