@@ -302,7 +302,7 @@ Student can export detailed schedule for the whole semester into PDF format - fo
 2. There would be some enrolled triples missing.
 
 **Result**
-- 
+
 ##### 3. Student can open detail of schedule-triple
 
 Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher.
@@ -315,7 +315,6 @@ Student can preview detail of given schedule-triple which can contain additional
 2. There would be some metadata missing.
 
 **Result**
-- 
 
 ##### 4. Teacher can edit metadata about schedule-triple
 
@@ -331,7 +330,6 @@ Teacher can edit several metadata about schedule-triple of subject they teach - 
 3. Saving the form would succeed but data would not be saved consistently.
 
 **Result**
-- 
 
 ##### 5. Planner can create schedule sheet
 
@@ -339,13 +337,17 @@ Planner can create schedule sheets according to the studying plan for current te
 Planner has a subject from studying plan he needs to schedule. He fills in a capacity, thus creating schedule sheet with unique ID. Capacity of various subjects may differ, lectures will usually have greater capacity than tutorials. Schedule sheets don´t need to be scheduled immediately and may be created at any time.
 
 **Right**
-1. Planner will see all available subjects.
-2. Planner will be able to choose a subject and create schedule sheet for it.
+1. Planner can see all available subjects.
+2. Planner is able to choose a subject and create schedule sheet for it.
 
 **Wrong**
-1. Planner would not have access to the list of subjects or studying plan.
-2. Creating of schedule sheet would fail.
-3. Creating a schedule sheet would succeed, but these changes would not be reflected in the system. 
+1. Planner does not have access to the list of subjects or studying plan.
+2. Creating of schedule sheet fails.
+3. ID of schedule scheet has already been assigned.
+4. Creating a schedule sheet succeeds, but these changes are not reflected in the system. 
+
+**Result**
+Schedule sheet is successfully created for given subject.
 
 ```plantuml
 @startuml
@@ -363,16 +365,19 @@ Create .> Plan : include
 ##### 6. Planner can assign schedule sheet to a schedule triple
 
 Planner can assign schedule sheet to a schedule triple and system will automatically check availability of assigned room during specified time slot.
-When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically (based on capacity constraint). System will automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
+When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically (based on capacity constraint). System should automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
 
 **Right**
 1. Planner can see all schedule sheets and schedule triples.
 2. Planner can choose schedule sheet and assign it to time slot and room.
 
 **Wrong**
-1. Planner would not be able to see schedule sheets or schedule triples.
-2. Assigning time slot and room to a schedule sheet would fail for some reason.
-3. Creating of schedule triple would be successful, however, these changes would not be reflected in the system.
+1. Planner is not able to see schedule sheets or schedule triples.
+2. Assigning time slot and room to a schedule sheet fails for some reason.
+3. Creating of schedule triple succeeds, however, these changes are not reflected in the system.
+
+**Result**
+Schedule triple is successfully created by assigning time slot and room to a schedule sheet.
 
 ```plantuml
 @startuml
@@ -387,26 +392,7 @@ Planner --> Triple
 @enduml
 ```
 
-##### 7. Planner can assign schedule sheet to a schedule triple
-
-Planner can assign schedule sheet to a schedule triple. There must be no conflicts among subjects taught at the same term which are compulsory according to the studying plan. System will not accept schedule triple, if it is in conflict with already registered schedule triple.
-
-```plantuml
-@startuml
-left to right direction
-actor Planner
-package Schedule {
-    usecase "Check time slot" as Check
-    usecase "Create schedule triple" as Create
-    usecase "Create schedule sheet" as Sheet
-}
-Planner --> Create
-Create .> Check : include
-Sheet <. Create : include
-@enduml
-```
-
-##### 8. Administrator updates module version
+##### 7. Administrator updates module version
 
 ```plantuml
 @startuml
@@ -463,7 +449,7 @@ normal operation.
 
 New version of the module is installed and under normal operation.
 
-##### 9. Teacher introduces unavailability constraints
+##### 8. Teacher introduces unavailability constraints
 
 **Input**
 
@@ -488,7 +474,7 @@ introducing teachers constraints.
 
 Planner is informed about optional teacher's unavailability.
 
-##### 10. Planner generates `central schedule` via solver
+##### 9. Planner generates `central schedule` via solver
 
 ```plantuml
 @startuml
@@ -533,7 +519,7 @@ are created and set.
 
 Conflict-free and modifiable `central schedule` is created.
 
-##### 11. Student can edit his schedule basket
+##### 10. Student can edit his schedule basket
 
 A student can mantain a basket of `schedule sheets` he is interested in enrolling. The basket serves as preliminary schedule and helps a student with planning a schedule for upcoming semester.
 To add subject to the basket, student must search for subject in `central schedule` and open detail view. System displays a list of `schedule sheets` belonging to the subject. Then student selects the `schedule sheet` and `add to basket`. System adds it to basket. Removing schedule sheet from basket can be requested when viewing the basket.
