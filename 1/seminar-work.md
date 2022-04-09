@@ -366,17 +366,17 @@ endif
 Planner can create schedule sheets according to the studying plan for current term.
 Planner has a subject from studying plan he needs to schedule. He fills in a capacity, thus creating schedule sheet with unique ID. Capacity of various subjects may differ, lectures will usually have greater capacity than tutorials. Schedule sheets don´t need to be scheduled immediately and may be created at any time.
 
-**Right**
+**Normal advancement**
 1. Planner can see all available subjects.
 2. Planner is able to choose a subject and create schedule sheet for it.
 
-**Wrong**
+**Wrong conditions**
 1. Planner does not have access to the list of subjects or studying plan.
 2. Creating of schedule sheet fails.
 3. ID of schedule scheet has already been assigned.
 4. Creating a schedule sheet succeeds, but these changes are not reflected in the system. 
 
-**Result**
+**State on completion**
 
 Schedule sheet is successfully created for given subject.
 
@@ -431,16 +431,16 @@ stop
 Planner can assign schedule sheet to a schedule triple and system will automatically check availability of assigned room during specified time slot.
 When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically (based on capacity constraint). System should automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
 
-**Right**
+**Normal advancement**
 1. Planner can see all schedule sheets and schedule triples.
 2. Planner can choose schedule sheet and assign it to time slot and room.
 
-**Wrong**
+**Wrong conditions**
 1. Planner is not able to see schedule sheets or schedule triples.
 2. Assigning time slot and room to a schedule sheet fails for some reason.
 3. Creating of schedule triple succeeds, however, these changes are not reflected in the system.
 
-**Result**
+**State on completion**
 
 Schedule triple is successfully created by assigning time slot and room to a schedule sheet.
 
@@ -474,12 +474,12 @@ c .> s : include
 @enduml
 ```
 
-**Input**
+**Initial state**
 
 The user is logged as an `administrator`. The module `Scheduling` is under
 normal operation.
 
-**Right**
+**Normal advancement**
 
 1. Administrator issues a command to stop service.
 
@@ -499,7 +499,7 @@ normal operation.
 
 9. Service reports acknowledgement back to the administrator.
 
-**Wrong**
+**Wrong conditions**
 
 1. Some of the long-lasting relations cannot be finalized, the module rejects shutdown.
 
@@ -510,18 +510,18 @@ normal operation.
   The administrator should study system log and contact support if it does
   not help.
 
-**Result**
+**State on completion**
 
 New version of the module is installed and under normal operation.
 
 ##### 8. Teacher introduces unavailability constraints
 
-**Input**
+**Initial state**
 
 The user is logged as a `teacher`. The `central schedule` is released for
 introducing teachers constraints.
 
-**Normal**
+**Normal advancement**
 
 1. The user opens `central schedule` for adding constraints.
 
@@ -530,12 +530,12 @@ introducing teachers constraints.
 
 3. The user saves introduced constraints.
 
-**Wrong**
+**Wrong conditions**
 
 1. Two overlapped time spans result in a conflict. The module kindly informs
   the user, however conflict might remain unsolved.
 
-**Output**
+**State on completion**
 
 Planner is informed about optional teacher's unavailability.
 
@@ -556,12 +556,12 @@ G .> I : include
 @enduml
 ```
 
-**Input**
+**Initial state**
 
 The user is logged as `planner`. All necessary `studying plans` and constraints
 are created and set.
 
-**Normal**
+**Normal advancement**
 
 1. Planner creates empty `central schedule`.
 
@@ -571,7 +571,7 @@ are created and set.
 
 4. Planner saves the most appropriate option, which might be modified later.
 
-**Wrong**
+**Wrong conditions**
 
 1. Constraints or `studying plans` cannot be satisfied, planner shall relax
   constraints or modify `studying plans`. Teacher constraints are considered
@@ -580,7 +580,7 @@ are created and set.
 2. Solver service exceeds timeout for responding. Planner should try to
   issue a new request or relax constraints.
 
-**Output**
+**State on completion**
 
 Conflict-free and modifiable `central schedule` is created.
 
@@ -610,13 +610,13 @@ Some elective subjects are not planned centrally, because these subjects are ver
 
 The schedulling is done by assigning `schedule sheet` to `schedule triple` like the planner does.
 
-**Input**
+**Initial state**
 
 `Central schedule` is published and schedulling
 of non-centrally planned subjects is allowed.
 The user is logged in and has a `teacher` role.
 
-**Normal**
+**Normal advancement**
 
 * User chooses schedule sheet he wants to schedule.
 
@@ -629,7 +629,7 @@ The user is logged in and has a `teacher` role.
 * User submits the form.
 * System checks for conflicts.
 
-**Wrong**
+**Wrong conditions**
 
 1. The room is already occupied in specified time span.
   System notifies user, `schedule triple` is not assigned to `schedule sheet`.
@@ -637,7 +637,7 @@ The user is logged in and has a `teacher` role.
 2. Room does not have sufficient capacity. 
   System notifies user, `schedule triple` is not assigned to `schedule sheet`.
 
-**Output**
+**State on completion**
 
 `Schedule sheet` is assigned new `schedule triple`.
 
