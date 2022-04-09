@@ -246,18 +246,17 @@ actor Planner as p
 actor Student as s
 actor Teacher as t
 package Scheduler {
-  usecase "1. Show Schedule" as UC1
-  usecase "2. Print schedule for given semester" as UC2
-  usecase "3. Preview schedule-triple detail" as UC3
-  usecase "4. Edit subject-triple detail" as UC4
-  usecase "5. Planner schedules manually" as UC5
-  usecase "6. Planner schedule triple 1" as UC6
-  usecase "7. Planner schedule triple 2" as UC7
-  usecase "8. Administrator updates version" as UC8
-  usecase "9. Teacher's unavailability" as UC9
-  usecase "10. Generate central schedule" as UC10
-  usecase "11. Edit schedule basket" as UC11
-  usecase "12. Schedule non-centrally planned subjects" as UC12
+  usecase "1. Student previews schedule" as UC1
+  usecase "2. Student exports schedule to PDF" as UC2
+  usecase "3. Student opens a detail of schedule-triple" as UC3
+  usecase "4. Teacher edits metadata about schedule-triple" as UC4
+  usecase "5. Planner creates schedule sheet" as UC5
+  usecase "6. Planner assigns schedule sheet" as UC6
+  usecase "7. Administrator updates module version" as UC7
+  usecase "8. Teacher introduces unavailability" as UC8
+  usecase "9. Planner generates central schedule via solver" as UC9
+  usecase "10. Student edits schedule basket" as UC10
+  usecase "11. Teacher schedules non-centrally planned subjects" as UC11
 }
 s --> UC1
 s --> UC2
@@ -265,7 +264,6 @@ s --> UC3
 t --> UC4
 p --> UC5
 p --> UC6
-p --> UC7
 a --> UC8
 t --> UC9
 p --> UC10
@@ -279,57 +277,56 @@ t --> UC12
 Student can preview schedule for given semester where he/she can see all
 subject triples in which he/she enrolled.
 
-**Right**
+**Normal advancement**
 1. Student will see a webpage containing schedule for his/her semester
 
-**Wrong**
+**Wrong conditions**
 1. Student would see someone elses schedule.
 2. There would be some enrolled triples missing.
 
-**Result**
+**State on completion**
 - 
 
 ##### 2. Student can export schedule to PDF
 
 Student can export detailed schedule for the whole semester into PDF format - for example for printing it out on paper.
 
-
-**Right**
+**Normal advancement**
 1. PDF file will get downloaded to student's device containing the full schedule for semester.
 
-**Wrong**
+**Wrong conditions**
 1. Student would download someone elses schedule.
 2. There would be some enrolled triples missing.
 
-**Result**
+**State on completion**
 
 ##### 3. Student can open detail of schedule-triple
 
 Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher.
 
-**Right**
+**Normal advancement**
 1. Student will see a webpage containing details of given schedule-triple.
 
-**Wrong**
+**Wrong conditions**
 1. Student would not have access to details of given schedule-tripple
 2. There would be some metadata missing.
 
-**Result**
+**State on completion**
 
 ##### 4. Teacher can edit metadata about schedule-triple
 
 Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with further instructions, links to external services (e.g. moodle, one drive) etc.
 
-**Right**
+**Normal advancement**
 1. Teacher will see a form for filling details about given schedule-triple.
 2. Teacher will be able to fill the form and save the data.
 
-**Wrong**
+**Wrong conditions**
 1. Teacher would not see the editing form.
 2. Saving the form would fail for some reason.
 3. Saving the form would succeed but data would not be saved consistently.
 
-**Result**
+**State on completion**
 
 ```plantuml
 @startuml
@@ -604,7 +601,7 @@ Remove <. Edit : include
 @enduml
 ```
 
-##### 12. Teacher can schedule non-centrally planned subjects
+##### 11. Teacher can schedule non-centrally planned subjects
 
 Some elective subjects are not planned centrally, because these subjects are very specialized and a few students are expected to enroll.
 
