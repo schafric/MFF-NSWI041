@@ -331,7 +331,7 @@ Teacher can edit several metadata about schedule-triple of subject they teach - 
 
 **Result**
 
-```
+```plantuml
 @startuml
 |#AntiqueWhite|t|Teacher
 start
@@ -393,7 +393,7 @@ Create .> Plan : include
 @enduml
 ```
 
-```
+```plantuml
 @startuml
 |#AntiqueWhite|p|Planner
 start
