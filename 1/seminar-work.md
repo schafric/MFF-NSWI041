@@ -278,58 +278,70 @@ Student can preview schedule for given semester where he/she can see all
 subject triples in which he/she enrolled.
 
 **Normal advancement**
+
 1. Student will see a webpage containing schedule for his/her semester
 
 **Wrong conditions**
+
 1. Student would see someone elses schedule.
 2. There would be some enrolled triples missing.
 
 **State on completion**
-- 
+
+\- 
 
 ##### 2. Student can export schedule to PDF
 
 Student can export detailed schedule for the whole semester into PDF format - for example for printing it out on paper.
 
 **Normal advancement**
+
 1. PDF file will get downloaded to student's device containing the full schedule for semester.
 
 **Wrong conditions**
+
 1. Student would download someone elses schedule.
 2. There would be some enrolled triples missing.
 
 **State on completion**
--
+
+\-
 
 ##### 3. Student can open detail of schedule-triple
 
 Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher.
 
 **Normal advancement**
+
 1. Student will see a webpage containing details of given schedule-triple.
 
 **Wrong conditions**
+
 1. Student would not have access to details of given schedule-tripple
 2. There would be some metadata missing.
 
 **State on completion**
--
+
+\-
 
 ##### 4. Teacher can edit metadata about schedule-triple
 
 Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with further instructions, links to external services (e.g. moodle, one drive) etc.
 
 **Normal advancement**
+
 1. Teacher will see a form for filling details about given schedule-triple.
 2. Teacher will be able to fill the form and save the data.
 
 **Wrong conditions**
+
 1. Teacher would not see the editing form.
 2. Saving the form would fail for some reason.
 3. Saving the form would succeed but data would not be saved consistently.
 
 **State on completion**
--
+
+\-
 
 **Activity diagram**
 
@@ -369,10 +381,12 @@ Planner can create schedule sheets according to the studying plan for current te
 Planner has a subject from studying plan he needs to schedule. He fills in a capacity, thus creating schedule sheet with unique ID. Capacity of various subjects may differ, lectures will usually have greater capacity than tutorials. Schedule sheets don´t need to be scheduled immediately and may be created at any time.
 
 **Normal advancement**
+
 1. Planner can see all available subjects.
 2. Planner is able to choose a subject and create schedule sheet for it.
 
 **Wrong conditions**
+
 1. Planner does not have access to the list of subjects or studying plan.
 2. Creating of schedule sheet fails.
 3. ID of schedule scheet has already been assigned.
@@ -438,10 +452,12 @@ Planner can assign schedule sheet to a schedule triple and system will automatic
 When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically (based on capacity constraint). System should automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
 
 **Normal advancement**
+
 1. Planner can see all schedule sheets and schedule triples.
 2. Planner can choose schedule sheet and assign it to time slot and room.
 
 **Wrong conditions**
+
 1. Planner is not able to see schedule sheets or schedule triples.
 2. Assigning time slot and room to a schedule sheet fails for some reason.
 3. Creating of schedule triple succeeds, however, these changes are not reflected in the system.
@@ -595,7 +611,33 @@ Planner is informed about optional teacher's unavailability.
 
 **Activity diagram**
 
-
+```plantuml
+@startuml
+|#AntiqueWhite|t|Teacher
+|#PowderBlue|m|Module
+|t|
+start
+|t|
+:Open central schedule;
+|t|
+:Select beginning and end of a time span;
+|t|
+:Confirm selection;
+|m|
+:Check overlapping time spans;
+fork
+    |t|
+    :Save form;
+fork again
+    |m|
+    :Inform about overlapping time spans;
+end fork
+|m|
+:Store selection in the database;
+|m|
+stop
+@enduml
+```
 
 ##### 9. Planner generates `central schedule` via solver
 
