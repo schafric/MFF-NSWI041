@@ -689,6 +689,31 @@ G .> I : include
 @enduml
 ```
 
+**Activity diagram**
+
+```plantuml
+@startuml
+|#AntiqueWhite|p|Planner
+|#PowderBlue|m|Module
+|p|
+start
+|p|
+:Create empty central schedule;
+repeat
+|p|
+:Modify constraints;
+|p|
+:Request schedule construction;
+|m|
+:Run solver on constraints;
+backward :Inform planner;
+repeat while (constructed schedules?) is (yes) not (no)
+|p|
+:Select schedule and confirm;
+stop
+@enduml
+```
+
 ##### 10. Student can edit his schedule basket
 
 A student can mantain a basket of `schedule sheets` he is interested in enrolling. The basket serves as preliminary schedule and helps a student with planning a schedule for upcoming semester.
