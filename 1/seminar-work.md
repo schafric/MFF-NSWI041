@@ -264,11 +264,11 @@ s --> UC3
 t --> UC4
 p --> UC5
 p --> UC6
-a --> UC8
-t --> UC9
-p --> UC10
-s --> UC11
-t --> UC12
+a --> UC7
+t --> UC8
+p --> UC9
+s --> UC10
+t --> UC11
 @enduml
 ```
 
@@ -377,6 +377,8 @@ Planner has a subject from studying plan he needs to schedule. He fills in a cap
 
 Schedule sheet is successfully created for given subject.
 
+**Use-case diagram**
+
 ```plantuml
 @startuml
 left to right direction
@@ -389,6 +391,8 @@ Planner --> Create
 Create .> Plan : include
 @enduml
 ```
+
+**Activity diagram**
 
 ```plantuml
 @startuml
@@ -441,6 +445,8 @@ When schedule sheet with unique ID has been created, it can be paired with room.
 
 Schedule triple is successfully created by assigning time slot and room to a schedule sheet.
 
+**Use-case diagram**
+
 ```plantuml
 @startuml
 left to right direction
@@ -455,21 +461,6 @@ Planner --> Triple
 ```
 
 ##### 7. Administrator updates module version
-
-```plantuml
-@startuml
-left to right direction
-actor Administrator as a
-package Schedule {
-    usecase "Update version" as v
-    usecase "Configure module" as c
-    usecase "Start module" as s
-}
-a --> v
-v .> c : include
-c .> s : include
-@enduml
-```
 
 **Initial state**
 
@@ -511,6 +502,67 @@ normal operation.
 
 New version of the module is installed and under normal operation.
 
+**Use-case diagram**
+
+```plantuml
+@startuml
+left to right direction
+actor Administrator as a
+package Schedule {
+    usecase "Update version" as v
+    usecase "Configure module" as c
+    usecase "Start module" as s
+}
+a --> v
+v .> c : include
+c .> s : include
+@enduml
+```
+
+**Activity diagram**
+
+```plantuml
+@startuml
+|#AntiqueWhite|a|Administrator
+|#PowderBlue|m|Module
+|#Pink|r|Remote
+|a|
+start
+|a|
+:Issue a command;
+|m|
+:Release broadcast message;
+|r|
+:Close down relations;
+if () then
+    |r|
+    :Release acknowledgement;
+else
+    |r|
+    :Reject closing relations;
+    |r|
+    :Inform administrator about failure;
+    stop
+endif
+|m|
+:Shut down service;
+|a|
+:Install new version;
+|a|
+:Start module with current configuration;
+|m|
+:Run starting procedure;
+fork
+    |a|
+    :Log out from the server;
+fork again
+    |m|
+    :Open relations with remote;
+end fork
+stop
+@enduml
+```
+
 ##### 8. Teacher introduces unavailability constraints
 
 **Initial state**
@@ -535,6 +587,10 @@ introducing teachers constraints.
 **State on completion**
 
 Planner is informed about optional teacher's unavailability.
+
+**Activity diagram**
+
+
 
 ##### 9. Planner generates `central schedule` via solver
 
