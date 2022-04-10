@@ -299,6 +299,7 @@ Student can export detailed schedule for the whole semester into PDF format - fo
 2. There would be some enrolled triples missing.
 
 **State on completion**
+-
 
 ##### 3. Student can open detail of schedule-triple
 
@@ -312,6 +313,7 @@ Student can preview detail of given schedule-triple which can contain additional
 2. There would be some metadata missing.
 
 **State on completion**
+-
 
 ##### 4. Teacher can edit metadata about schedule-triple
 
@@ -327,6 +329,9 @@ Teacher can edit several metadata about schedule-triple of subject they teach - 
 3. Saving the form would succeed but data would not be saved consistently.
 
 **State on completion**
+-
+
+**Activity diagram**
 
 ```plantuml
 @startuml
@@ -594,21 +599,6 @@ Planner is informed about optional teacher's unavailability.
 
 ##### 9. Planner generates `central schedule` via solver
 
-```plantuml
-@startuml
-left to right direction
-actor Planner as p
-package Schedule {
-    usecase "Create studying plans" as C
-    usecase "Generate central schedule" as G
-    usecase "Intro constraints" as I
-}
-p --> G
-G .> C : include
-G .> I : include
-@enduml
-```
-
 **Initial state**
 
 The user is logged as `planner`. All necessary `studying plans` and constraints
@@ -637,10 +627,29 @@ are created and set.
 
 Conflict-free and modifiable `central schedule` is created.
 
+**Use-case diagram**
+
+```plantuml
+@startuml
+left to right direction
+actor Planner as p
+package Schedule {
+    usecase "Create studying plans" as C
+    usecase "Generate central schedule" as G
+    usecase "Intro constraints" as I
+}
+p --> G
+G .> C : include
+G .> I : include
+@enduml
+```
+
 ##### 10. Student can edit his schedule basket
 
 A student can mantain a basket of `schedule sheets` he is interested in enrolling. The basket serves as preliminary schedule and helps a student with planning a schedule for upcoming semester.
 To add subject to the basket, student must search for subject in `central schedule` and open detail view. System displays a list of `schedule sheets` belonging to the subject. Then student selects the `schedule sheet` and `add to basket`. System adds it to basket. Removing schedule sheet from basket can be requested when viewing the basket.
+
+**Use-case diagram**
 
 ```plantuml
 @startuml
@@ -693,6 +702,8 @@ The user is logged in and has a `teacher` role.
 **State on completion**
 
 `Schedule sheet` is assigned new `schedule triple`.
+
+**Activity diagram**
 
 ```plantuml
 @startuml
