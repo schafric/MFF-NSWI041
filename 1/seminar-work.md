@@ -108,8 +108,6 @@ In this chapter, we specify user requirements in greater details. We use approac
 
 ## Actors
 
-We define several kinds of actors: administrator, planner, student and teacher.
-
 ### 1. Administrator
 
 `Administrator` is an actor performing module maintenance and administrative tasks, such as user administration, deployment of new module versions. Synchronization with other modules is performed automatically and in a daily basis.
@@ -180,8 +178,6 @@ t --> UC11
 
 ### 1. Student can preview schedule
 
-_Student can preview schedule for given semester where he/she can see all subject triples in which he/she enrolled._
-
 **Normal advancement**
 
 1. Student will see a webpage containing schedule for his/her semester
@@ -211,7 +207,7 @@ _Student can preview schedule for given semester where he/she can see all subjec
 \-
 
 ### 3. Student can open detail of schedule-triple
-_Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher._
+_Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple. For example reading some further description/instruction from teacher._
 
 **Normal advancement**
 
@@ -227,7 +223,7 @@ _Student can preview detail of given schedule-triple which can contain additiona
 \-
 
 ### 4. Teacher can edit metadata about schedule-triple
-_Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with further instructions, links to external services (e.g. moodle, one drive) etc._
+_Teacher can edit several metadata about schedule-triple of subject they teach. For example providing students with further instructions, links to external services (e.g. moodle, one drive) etc._
 
 **Normal advancement**
 
