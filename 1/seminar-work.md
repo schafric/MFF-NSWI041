@@ -36,7 +36,7 @@ a `planner` for the upcoming semester.
 `Standard operations` on a system entity are creating, modifying, removing
 and viewing.
 
-The following diagram shows important objects and how they are related.
+## Information model
 
 ```plantuml
 @startuml
@@ -49,13 +49,16 @@ object "Schedule triple" as ScheduleTriple
 object Schedule
 object "Central schedule" as CentralSchedule
 object "Time span" as TimeSpan
+object Basket
 
 Room : capacity
 ScheduleSheet : capacity
+ScheduleTriple : metadata
 
 StudyingPlan "0..*" --> "0..*" Semester
-Semester "0..*" --> "0..*" Subject
+Semester "0..*" --> "0..*" Subject : "recommended\nsemester"
 CentralSchedule --|> Schedule
+Basket --|> Schedule
 Schedule "0..*" --> "0..*" ScheduleTriple
 ScheduleTriple "0..1" --> "1" ScheduleSheet
 ScheduleTriple "0..*" --> "1" Room
