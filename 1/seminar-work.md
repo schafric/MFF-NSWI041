@@ -180,7 +180,7 @@ t --> UC11
 
 ### 1. Student can preview schedule
 
-> Student can preview schedule for given semester where he/she can see all subject triples in which he/she enrolled.
+_Student can preview schedule for given semester where he/she can see all subject triples in which he/she enrolled._
 
 **Normal advancement**
 
@@ -194,8 +194,6 @@ t --> UC11
 **State on completion**
 
 \- 
-
-##### 2. Student can export schedule to PDF
 
 ### 2. Student can export schedule to PDF
 
@@ -212,9 +210,8 @@ t --> UC11
 
 \-
 
-##### 3. Student can open detail of schedule-triple
-
-Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher.
+### 3. Student can open detail of schedule-triple
+_Student can preview detail of given schedule-triple which can contain additional information about this specific schedule-triple - for example reading some further description/instruction from teacher._
 
 **Normal advancement**
 
@@ -230,7 +227,7 @@ Student can preview detail of given schedule-triple which can contain additional
 \-
 
 ### 4. Teacher can edit metadata about schedule-triple
-> Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with further instructions, links to external services (e.g. moodle, one drive) etc.
+_Teacher can edit several metadata about schedule-triple of subject they teach - for example providing students with further instructions, links to external services (e.g. moodle, one drive) etc._
 
 **Normal advancement**
 
@@ -280,7 +277,7 @@ endif
 ```
 
 ### 5. Planner can create schedule sheet
-> Planner can create schedule sheets according to the studying plan for current term. Planner has a subject from studying plan he needs to schedule. He fills in a capacity, thus creating schedule sheet with unique ID. Capacity of various subjects may differ, lectures will usually have greater capacity than tutorials. Schedule sheets don´t need to be scheduled immediately and may be created at any time.
+_Planner can create schedule sheets according to the studying plan for current term. Planner has a subject from studying plan he needs to schedule. He fills in a capacity, thus creating schedule sheet with unique ID. Capacity of various subjects may differ, lectures will usually have greater capacity than tutorials. Schedule sheets don´t need to be scheduled immediately and may be created at any time._
 
 **Normal advancement**
 
@@ -348,10 +345,9 @@ stop
 @enduml
 ```
 
-##### 6. Planner can assign schedule sheet to a schedule triple
+### 6. Planner can assign schedule sheet to a schedule triple
 
-Planner can assign schedule sheet to a schedule triple and system will automatically check availability of assigned room during specified time slot.
-When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically (based on capacity constraint). System should automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created.
+_Planner can assign schedule sheet to a schedule triple and system will automatically check availability of assigned room during specified time slot. When schedule sheet with unique ID has been created, it can be paired with room. Room may be chosen manually (by planner) or automatically (based on capacity constraint). System should automatically check whether assigned room is available during specified time slot. If the room is not available, schedule triple will not be created._
 
 **Normal advancement**
 
@@ -383,7 +379,7 @@ Planner --> Triple
 @enduml
 ```
 
-##### 7. Administrator updates module version
+### 7. Administrator updates module version
 
 **Initial state**
 
@@ -472,7 +468,7 @@ stop
 @enduml
 ```
 
-##### 8. Teacher introduces unavailability constraints
+### 8. Teacher introduces unavailability constraints
 
 **Initial state**
 
@@ -522,7 +518,7 @@ stop
 @enduml
 ```
 
-##### 9. Planner generates `central schedule` via solver
+### 9. Planner generates `central schedule` via solver
 
 **Initial state**
 
@@ -586,9 +582,8 @@ stop
 @enduml
 ```
 
-##### 10. Student can edit his schedule basket
-
-> A student can mantain a basket of `schedule sheets` he is interested in enrolling. The basket serves as preliminary schedule and helps a student with planning a schedule for upcoming semester. To add subject to the basket, student must search for subject in `central schedule` and open detail view. System displays a list of `schedule sheets` belonging to the subject. Then student selects the `schedule sheet` and `add to basket`. System adds it to basket. Removing schedule sheet from basket can be requested when viewing the basket.
+### 10. Student can edit his schedule basket
+_A student can mantain a basket of `schedule sheets` he is interested in enrolling. The basket serves as preliminary schedule and helps a student with planning a schedule for upcoming semester. To add subject to the basket, student must search for subject in `central schedule` and open detail view. System displays a list of `schedule sheets` belonging to the subject. Then student selects the `schedule sheet` and `add to basket`. System adds it to basket. Removing schedule sheet from basket can be requested when viewing the basket._
 
 **Use-case diagram**
 
@@ -607,11 +602,9 @@ Remove <. Edit : include
 @enduml
 ```
 
-##### 11. Teacher can schedule non-centrally planned subjects
+### 11. Teacher can schedule non-centrally planned subjects
 
-Some elective subjects are not planned centrally, because these subjects are very specialized and a few students are expected to enroll.
-
-The schedulling is done by assigning `schedule sheet` to `schedule triple` like the planner does.
+_Some elective subjects are not planned centrally, because these subjects are very specialized and a few students are expected to enroll. The schedulling is done by assigning `schedule sheet` to `schedule triple` like the planner does._
 
 **Initial state**
 
