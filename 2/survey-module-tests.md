@@ -47,7 +47,7 @@ The person trying to log into the system is a student with valid login/password.
 
 
 
-### 3.`Student` tries to fill in an existent survey
+### 3.`Student` tries to fill in an existing survey
 
 **Setup**
 
