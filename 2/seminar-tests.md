@@ -10,59 +10,50 @@
 
 **Steps**
 
-- `Teacher` opens a form for creating new survey.
+- `Teacher` opens a form for creating new survey by pressing `New survey` button.
 - `Teacher` fills in metadata for a non-existing subject identified by unique `id` and time span. Example of malformed triple is `Teacher, XXXX, 12:00:00 12:45:00`, where the subject identifier does not follow naming convention.
-- `Teacher` requests for a new survey by pushing the button `New survey`.
+- `Teacher` requests for a new survey by pushing the button `Confirm`.
 - `Teacher` sees data are accepted and send to the service.
-- After a negligible time span, `teacher` is informed about unsuccessful attempt via popup window with the reason of refusal.
+- After a negligible time span, `teacher` is informed about unsuccessful attempt via popup window with the reason of the refusal.
 
-### 02, wrong permissions
-
-**Setup**
-
-- The `teacher` is logged in and authenticated.
-- The `teacher` has requested existing subject, which has been confirmed by the `Surveys module`.
-
-**Steps**
-
-- The `Surveys module` requests authentication and administration subsystem to check whether `teacher` could create surveys.
-- The subsystem responses negatively.
-- The `Surveys module` logs the unsuccessful attempt in the database.
-- The `Surveys module` generates negative response to the teacher.
-- The `teacher` is informed about unsuccessful attempt in the message box.
-
-### 03, fill in invalid survey data
+### 02, missing permissions
 
 **Setup**
 
-- The `teacher` is logged in, authenticated and has permissions to create surveys.
-- The `Surveys module` validated request successfully.
+- Permission to create surveys is removed from the `teacher` user before the test.
+- `Teacher` is logged in and authenticated.
 
 **Steps**
 
-- The `teacher` is redirected to the new survey form.
-- The `teacher` fills in survey parameters such as title, purpose, time span, etc.
-- The `teacher` confirms that survey is finalized.
-- The `Surveys module` receives survey data serialized into `JSON`.
-- The `Surveys module` validates `JSON` against `JSON Schema`.
-- The `Surveys module` deserialize data into a structure, verifies the content, and detects invalid parameters.
-- The `Surveys module` send a message to the `teacher` regarding wrong parameters.
-- The `teacher` is notified via message box and is able to correct the survey data.
+- `Teacher` searches for existing subject identity in the `Search module`.
+- `Teacher` requests creation of the new survey with `New survey` and identity.
+- `Teacher` is informed about unsuccessful attempt via popup with the reason.
+
+### 03, missing survey data
+
+**Setup**
+
+- `Teacher` is logged in, authenticated and has permissions to create surveys. Permissions are checked in the specific module.
+
+**Steps**
+
+- `Teacher` requests new survey with existing subject identity.
+- `Teacher` is redirected to the new survey form.
+- `Teacher` fills in survey parameters, such as purpose, time span, etc. and does not fill in title parameter.
+- `Teacher` confirms that the survey parameters are finalized by pressing the button `Confirm`.
+- `Teacher` is notified about missing title via popup.
 
 ### 04, teacher creates new survey
 
 **Setup**
 
-- The `teacher` is logged in, authenticated and has permissions to create surveys.
-- The `Surveys module` validated request successfully.
+- `Teacher` is logged in, authenticated and has permissions to create surveys.
 
 **Steps**
 
-- The `teacher` fills in valid survey parameters.
-- The `teacher` confirms that survey is finalized.
-- The `Surveys module` receives survey data serialized into `JSON`, deserialize them and verify.
-- The `Surveys module` request `database` with survey parameters.
-- The `database` response positively, the survey is created.
-- The `Surveys module` generate a positive message to the `teacher`.
-- The `teacher` is notified via message box.
-- The `teacher` is able to create new survey.
+- `Teacher` fills in valid subject identity (a triple) and presses the button `New survey`.
+- New survey form opens.
+- `Teacher` enters valid survey parameters (title, etc.).
+- `Teacher` confirms that survey is finalized by pressing `Confirm` button.
+- `Teacher` is notified via popup about successful attempt.
+- `Teacher` is proposed to create new survey.
