@@ -1,59 +1,98 @@
-# Test cases for the `Surveys` module
+## Use case: Teacher views detailed results of surveys he made
 
-## Teacher creates a survey for his subject
+### Test case 1: Request is invalid.
+---
+**Setup**:
+  - You are logged in as teacher user with username: test-teacher.
+  - Teacher you are signed in as is able to request detailed results of a survey.
+**Steps**:
+  - Request results of a survey which does not exists.
+  - Open the response.
+    - [Assertion]: Status code should be 400 (invalid request).
+    - [Assertion]: There are no data in the response body.
 
-### 01, non-existing subject
+### Test case 2: Teachers does no have permissons.
+---
+**Setup**:
+  - You are logged in as teacher user with username: test-teacher.
+  - test-teacher you are signed in as is able to request detailed results of a survey.
+  - There is a active survey to some subject, which was created by another teacher (your teacher lacks permissons to open it)
+**Steps**:
+  - Request results of a survey from setup.
+    - [Assertion]: Status code should be 401 (unauthorized).
+    - [Assertion]: There are no data in the response body.
 
-**Setup**
+### Test case 3: Success scenario
+---
+**Setup**:
+  - You are logged in as teacher user with username: test-teacher.
+  - test-teacher you are signed in as is able to request detailed results of a survey.
+  - test-teacher has active survey to test-subject.
+**Steps**:
+  - Request results of a survey from setup.
+    - [Assertion]: Status code should be 200 (success).
+  - You should see a page with results of the survey.
+    - [Assertion]: Name of subject this survey belongs to is test-subject.
+    - [Assertion]: You can see calculated statistical indicators.
 
-`Teacher` is logged in and authenticated.
+## Use case: Teacher creates a survey for his subject
 
-**Steps**
-
-- `Teacher` opens a form for creating new survey by pressing `New survey` button.
-- `Teacher` fills in metadata for a non-existing subject identified by unique `id` and time span. Example of malformed triple is `Teacher, XXXX, 12:00:00 12:45:00`, where the subject identifier does not follow naming convention.
-- `Teacher` requests for a new survey by pushing the button `Confirm`.
-- `Teacher` sees data are accepted and send to the service.
-- After a negligible time span, `teacher` is informed about unsuccessful attempt via popup window with the reason of the refusal.
-
-### 02, missing permissions
-
-**Setup**
-
-- Permission to create surveys is removed from the `teacher` user before the test.
-- `Teacher` is logged in and authenticated.
-
-**Steps**
-
-- `Teacher` searches for existing subject identity in the `Search module`.
-- `Teacher` requests creation of the new survey with `New survey` and identity.
-- `Teacher` is informed about unsuccessful attempt via popup with the reason.
-
-### 03, missing survey data
-
-**Setup**
-
-- `Teacher` is logged in, authenticated and has permissions to create surveys. Permissions are checked in the specific module.
-
-**Steps**
-
-- `Teacher` requests new survey with existing subject identity.
-- `Teacher` is redirected to the new survey form.
-- `Teacher` fills in survey parameters, such as purpose, time span, etc. and does not fill in title parameter.
-- `Teacher` confirms that the survey parameters are finalized by pressing the button `Confirm`.
-- `Teacher` is notified about missing title via popup.
-
-### 04, teacher creates new survey
+### Test case 1: Non-existing subject
+---
 
 **Setup**
 
-- `Teacher` is logged in, authenticated and has permissions to create surveys.
+You are logged in and authenticated as `Teacher` user with username `test-teacher`
 
 **Steps**
 
-- `Teacher` fills in valid subject identity (a triple) and presses the button `New survey`.
-- New survey form opens.
-- `Teacher` enters valid survey parameters (title, etc.).
-- `Teacher` confirms that survey is finalized by pressing `Confirm` button.
-- `Teacher` is notified via popup about successful attempt.
-- `Teacher` is proposed to create new survey.
+- Open a form for creating new survey by pressing `New survey` button.
+- Fills in metadata for a non-existing subject identified by unique `id` and time span. Example of malformed triple is `Teacher, XXXX, 12:00:00 12:45:00`, where the subject identifier does not follow naming convention.
+- Request a new survey by pushing the button `Confirm`.
+- [Assertion]: You should see, that data are accepted and send to the service.
+- [Assertion]: After a negligible time span, you are informed about unsuccessful attempt via popup window with the reason of the refusal.
+
+### Test case 2:  Missing permissions
+---
+
+**Setup**
+
+- Permission to create surveys is removed from the `test-teacher` user before the test.
+- You are logged in and authenticated as a teacher with username `test-teacher`.
+
+**Steps**
+
+- Search for existing subject identity in the `Search module`.
+- Request creation of the new survey with `New survey` and identity.
+- [Assertion]: You should be informed about unsuccessful attempt via popup with the reason.
+
+### Test case 3: Missing survey data
+---
+
+**Setup**
+
+- You are logged in as teacher with username `test-teacher`, authenticated and `test-teacher` has permissions to create surveys. Permissions are checked in the specific module.
+
+**Steps**
+
+- Request new survey with existing subject identity.
+- [Assertion]: You are redirected to the new survey form.
+- Fill in survey parameters, such as purpose, time span, etc., but do not fill in title parameter.
+- Confirm that the survey parameters are finalized by pressing the button `Confirm`.
+- [Assertion]: You are notified about missing title via popup.
+
+### Test case 4: Teacher creates new survey
+---
+
+**Setup**
+
+- You are logged in as teacher with username `test-teacher`, authenticated and `test-teacher` has permissions to create surveys.
+
+**Steps**
+
+- Fills in valid subject identity (a triple) and presses the button `New survey`.
+- [Assertion]: New survey form opens.
+- Fill in valid survey parameters (title, etc.).
+- Confirm that survey is finalized by pressing `Confirm` button.
+- [Assertion]: You are notified via popup about successful attempt.
+- You are proposed to create new survey.
