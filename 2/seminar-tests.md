@@ -6,21 +6,15 @@
 
 **Setup**
 
-The `teacher` is logged in and authenticated.
+`Teacher` is logged in and authenticated.
 
 **Steps**
 
-- The `teacher` opens a form for creating new survey.
-- The `teacher` fills in metadata for a non-existing subject identified by unique `id` and time span.
-- The `teacher` requests for a new survey by pushing the button.
-- The `Surveys module` receives request data formatted as a `JSON`.
-  - Assertion: `JSON` validity is checked.
-  - Assertion: `JSON` is validated against `JSON Schema`.
-- The `Surveys module` checks whether the triple `(teacher, subject id, time span)` exists in the `central schedule`.
-  - `central schedule` responses negative.
-- The `Surveys module` logs the unsuccessful attempt in the database.
-- The `Surveys module` generates negative response to the teacher.
-- The `teacher` is informed about unsuccessful attempt in the message box.
+- `Teacher` opens a form for creating new survey.
+- `Teacher` fills in metadata for a non-existing subject identified by unique `id` and time span. Example of malformed triple is `Teacher, XXXX, 12:00:00 12:45:00`, where the subject identifier does not follow naming convention.
+- `Teacher` requests for a new survey by pushing the button `New survey`.
+- `Teacher` sees data are accepted and send to the service.
+- After a negligible time span, `teacher` is informed about unsuccessful attempt via popup window with the reason of refusal.
 
 ### 02, wrong permissions
 
